@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: core-api-v1
+  namespace: app-2
+  labels:
+    app: core-api
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: core-api
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: core-api
+        version: v1
+    spec:
+      containers:
+      - name: core-api
+        image: docker.io/cleancodeid/laravel-micro:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: APP_NAME
+          value: "Core API v1"
